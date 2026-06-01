@@ -4,7 +4,7 @@ A full-stack network monitoring tool that captures and analyzes live
 TCP/IP, UDP, ARP, and ICMP traffic in real time — with anomaly detection,
 a React dashboard, and automated reporting.
 
-![Dashboard](docs/dashboard-screenshot.png)
+![Dashboard](dashboard.png)
 
 ## Tech stack
 
@@ -71,7 +71,7 @@ network-analyzer/
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/YOUR_USERNAME/network-traffic-analyzer.git
+git clone https://github.com/Shobha000/network-traffic-analyzer.git
 cd network-traffic-analyzer
 ```
 
