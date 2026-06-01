@@ -109,6 +109,16 @@ npm install
 npm run dev
 # open http://localhost:5173
 ```
+## Installation
+
+```bash
+git clone <https://github.com/Shobha000/network-traffic-analyzer>
+cd network-analyzer
+
+python3 -m venv venv
+source venv/bin/activate
+
+pip install -r requirements.txt
 
 ## API endpoints
 
