@@ -30,8 +30,8 @@ a React dashboard, and automated reporting.
 
 ## Stats from a real capture session
 
-- 300,000 packets analyzed over 8 hours
-- 14000 anomaly events detected across 3 types
+- 300,000 packets analyzed over 24 hours
+- 547 anomaly events detected across 3 types
 - 184.2 MB of traffic logged to MySQL
 
 ## Project structure
