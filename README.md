@@ -4,7 +4,7 @@ A full-stack network monitoring tool that captures and analyzes live
 TCP/IP, UDP, ARP, and ICMP traffic in real time — with anomaly detection,
 a React dashboard, and automated reporting.
 
-![Dashboard](dashboard.png)
+![Dashboard](screenshots/dashboard.png)
 
 ## Tech stack
 
