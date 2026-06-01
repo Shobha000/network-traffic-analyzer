@@ -1,6 +1,4 @@
 import mysql.connector
-
-import mysql.connector
 from config import DB_CONFIG
 SCHEMA = """
 CREATE DATABASE IF NOT EXISTS network_analyzer;
