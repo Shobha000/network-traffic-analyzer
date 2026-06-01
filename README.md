@@ -54,6 +54,19 @@ network-analyzer/
 └── README.md
 ```
 
+## Screenshots
+
+### Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### Analytics
+![Analytics](screenshots/analytics.png)
+
+### Alerts
+![Alerts](screenshots/alerts.png)
+
+### System Status
+![System Status](screenshots/system.png)
 ## Setup
 
 ### 1. Clone the repo
