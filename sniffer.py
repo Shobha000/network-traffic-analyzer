@@ -5,25 +5,52 @@ import collections, threading, time
 
 packet_counts = collections.defaultdict(int)
 src_counts    = collections.defaultdict(int)
-ANOMALY_THRESHOLD = 100
+dst_tracking = collections.defaultdict(set)
+ANOMALY_THRESHOLD = 10
 
-def detect_anomaly(src_ip, proto):
-    key = (src_ip, proto)
+
+def detect_anomaly(src, dst, proto, size):
+
+    # ---------- High Traffic Detection ----------
+    key = (src, proto)
     src_counts[key] += 1
-    if src_counts[key] == ANOMALY_THRESHOLD:
-        log_anomaly(src_ip, proto, f"High traffic: {ANOMALY_THRESHOLD}+ packets")
 
-def log_anomaly(src_ip, proto, reason):
+
+    if src_counts[key] == ANOMALY_THRESHOLD:
+        log_anomaly(
+            src,
+            proto,
+            f"High traffic detected: {ANOMALY_THRESHOLD}+ packets"
+        )
+
+    # ---------- Port Scan Style Detection ----------
+    dst_tracking[src].add(dst)
+
+    if len(dst_tracking[src]) > 5:
+        log_anomaly(
+            src,
+            proto,
+            "Possible port scan behavior detected"
+        )
+
+    # ---------- Large Packet Detection ----------
+    if size > 1500:
+        log_anomaly(
+            src,
+            proto,
+            f"Large packet detected: {size} bytes"
+        )
+def log_anomaly(src, proto, reason):
     conn = get_connection()
     cur  = conn.cursor()
     cur.execute(
         "INSERT INTO anomalies (src_ip, protocol, reason, detected_at) "
         "VALUES (%s, %s, %s, %s)",
-        (src_ip, proto, reason, datetime.now())
+        (src, proto, reason, datetime.now())
     )
     conn.commit()
     conn.close()
-    print(f"[ANOMALY] {src_ip} ({proto}): {reason}")
+    print(f"[ANOMALY] {src} ({proto}): {reason}")
 
 def process_packet(pkt):
     ts   = datetime.now()
@@ -34,7 +61,7 @@ def process_packet(pkt):
         dst = pkt[ARP].pdst
         insert_packet(src, dst, "ARP", size, ts)
         packet_counts["ARP"] += 1
-        detect_anomaly(src, "ARP")
+        detect_anomaly(src,dst, "ARP",size)
 
     elif pkt.haslayer(IP):
         src   = pkt[IP].src
@@ -44,7 +71,7 @@ def process_packet(pkt):
                 "ICMP" if pkt.haslayer(ICMP) else "IP"
         insert_packet(src, dst, proto, size, ts)
         packet_counts[proto] += 1
-        detect_anomaly(src, proto)
+        detect_anomaly(src,dst,proto,size)
 
 def stats_printer():
     while True:
@@ -59,3 +86,4 @@ if __name__ == "__main__":
     t = threading.Thread(target=stats_printer, daemon=True)
     t.start()
     sniff(prn=process_packet, store=False)
+

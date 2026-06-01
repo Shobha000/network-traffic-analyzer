@@ -1,4 +1,35 @@
-venv/
+# ── Python ──
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
 .env
+
+# ── Config with secrets ──
+config.py
+*.env
+
+# ── Captured data (can be huge) ──
+reports/
+*.pcap
+capture.log
+*.log
+
+# ── Node / React ──
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/coverage/
+
+# ── OS junk ──
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

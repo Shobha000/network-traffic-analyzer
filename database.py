@@ -1,12 +1,7 @@
 import mysql.connector
 
-DB_CONFIG = {
-    "host":     "localhost",
-    "user":     "netuser",
-    "password": "Netpass@123",
-    "database": "network_analyzer"
-}
-
+import mysql.connector
+from config import DB_CONFIG
 SCHEMA = """
 CREATE DATABASE IF NOT EXISTS network_analyzer;
 USE network_analyzer;
