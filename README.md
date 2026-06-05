@@ -122,13 +122,14 @@ pip install -r requirements.txt
 
 ## API endpoints
 
-| Endpoint                  | Returns                        |
-|---------------------------|----------------| GET /api/stats            | total packets, anomalies, uptime|
-| GET /api/protocols        | protocol breakdown counts      |
+| Endpoint                  | Returns                         |
+|---------------------------|---------------------------------|
+| GET /api/stats            | total packets, anomalies, uptime|
+| GET /api/protocols        | protocol breakdown counts       |
 | GET /api/talkers          | top 8 source IPs by packet count|
 | GET /api/anomalies        | last 30 anomalies with severity |
-| GET /api/traffic-over-time| packets per minute (last hour) |
-| GET /api/packet-sizes     | packet size distribution       |
+| GET /api/traffic-over-time| packets per minute (last hour)  |
+| GET /api/packet-sizes     | packet size distribution        |
 
 ## Anomaly detection
 
